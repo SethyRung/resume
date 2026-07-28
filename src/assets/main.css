@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+  --color-sidebar: #1a2238;
+  --color-sidebar-2: #2a3354;
+  --color-sidebar-text: #c7cce0;
+  --color-sidebar-dim: #8a91b0;
+  --color-accent: #1f4d3a;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #3f3f3f;
+  --color-muted: #7a7a7a;
+
+  --font-sans: "Geist", sans;
+  --font-mono: "Geist Mono", monospace;
+}
