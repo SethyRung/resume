@@ -1,138 +1,178 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-@theme {
+@theme static {
+  --color-primary-50: #f2f7fd;
+  --color-primary-100: #e5eef9;
+  --color-primary-200: #c5dbf2;
+  --color-primary-300: #91bee8;
+  --color-primary-400: #569cda;
+  --color-primary-500: #3180c6;
+  --color-primary-600: #2164a8;
+  --color-primary-700: #1c5088;
+  --color-primary-800: #1b4571;
+  --color-primary-900: #1c3c60;
+  --color-primary-950: #12263f;
+
   --font-sans: "Geist", sans;
   --font-mono: "Geist Mono", monospace;
+  --font-pixel: "Press Start 2P", monospace;
+  --font-pixel-circle: "Geist Pixel Circle", sans-serif;
+  --font-pixel-grid: "Geist Pixel Grid", sans-serif;
+  --font-pixel-line: "Geist Pixel Line", sans-serif;
+  --font-pixel-square: "Geist Pixel Square", sans-serif;
+  --font-pixel-triangle: "Geist Pixel Triangle", sans-serif;
 }
 
 @font-face {
   font-family: "Geist";
-  src: url("/fonts/Geist/Geist-Thin.ttf") format("truetype");
+  src: url("fonts/Geist/Geist-Thin.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist";
-  src: url("/fonts/Geist/Geist-ExtraLight.ttf") format("truetype");
+  src: url("fonts/Geist/Geist-ExtraLight.ttf") format("truetype");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist";
-  src: url("/fonts/Geist/Geist-Light.ttf") format("truetype");
+  src: url("fonts/Geist/Geist-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist";
-  src: url("/fonts/Geist/Geist-Regular.ttf") format("truetype");
+  src: url("fonts/Geist/Geist-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist";
-  src: url("/fonts/Geist/Geist-Medium.ttf") format("truetype");
+  src: url("fonts/Geist/Geist-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist";
-  src: url("/fonts/Geist/Geist-SemiBold.ttf") format("truetype");
+  src: url("fonts/Geist/Geist-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist";
-  src: url("/fonts/Geist/Geist-Bold.ttf") format("truetype");
+  src: url("fonts/Geist/Geist-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist";
-  src: url("/fonts/Geist/Geist-ExtraBold.ttf") format("truetype");
+  src: url("fonts/Geist/Geist-ExtraBold.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist Mono";
-  src: url("/fonts/GeistMono/GeistMono-Thin.ttf") format("truetype");
+  src: url("fonts/GeistMono/GeistMono-Thin.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist Mono";
-  src: url("/fonts/GeistMono/GeistMono-ExtraLight.ttf") format("truetype");
+  src: url("fonts/GeistMono/GeistMono-ExtraLight.ttf") format("truetype");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist Mono";
-  src: url("/fonts/GeistMono/GeistMono-Light.ttf") format("truetype");
+  src: url("fonts/GeistMono/GeistMono-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist Mono";
-  src: url("/fonts/GeistMono/GeistMono-Regular.ttf") format("truetype");
+  src: url("fonts/GeistMono/GeistMono-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist Mono";
-  src: url("/fonts/GeistMono/GeistMono-Medium.ttf") format("truetype");
+  src: url("fonts/GeistMono/GeistMono-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist Mono";
-  src: url("/fonts/GeistMono/GeistMono-SemiBold.ttf") format("truetype");
+  src: url("fonts/GeistMono/GeistMono-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist Mono";
-  src: url("/fonts/GeistMono/GeistMono-Bold.ttf") format("truetype");
+  src: url("fonts/GeistMono/GeistMono-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Geist Mono";
-  src: url("/fonts/GeistMono/GeistMono-ExtraBold.ttf") format("truetype");
+  src: url("fonts/GeistMono/GeistMono-ExtraBold.ttf") format("truetype");
   font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Pixel Circle";
+  src: url("fonts/GeistPixel/GeistPixel-Circle.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Pixel Grid";
+  src: url("fonts/GeistPixel/GeistPixel-Grid.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Pixel Line";
+  src: url("fonts/GeistPixel/GeistPixel-Line.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Pixel Square";
+  src: url("fonts/GeistPixel/GeistPixel-Square.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Pixel Triangle";
+  src: url("fonts/GeistPixel/GeistPixel-Triangle.ttf") format("truetype");
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @page {
   size: A4;
-  margin: 0;
-}
-
-html,
-body {
-  font-family: "Geist", system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: geometricPrecision;
-  color: #1a1a1a;
-  margin: 0;
-}
-
-body {
-  background: #e7e9ee;
+  margin: 12mm 0;
 }

@@ -12,8 +12,13 @@ export default defineConfig({
     ui({
       router: false,
       colorMode: false,
+      prose: true,
+      autoImport: {
+        imports: ["vue", "@vueuse/core"],
+      },
       ui: {
         colors: {
+          primary: "primary",
           neutral: "zinc",
         },
       },
