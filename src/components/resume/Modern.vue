@@ -196,3 +196,10 @@ const projects = [
     </article>
   </Suspense>
 </template>
+
+<style>
+@page {
+  size: A4;
+  margin: 12mm 0;
+}
+</style>

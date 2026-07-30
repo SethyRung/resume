@@ -5,6 +5,7 @@ const sheetRef = useTemplateRef<HTMLElement>("sheet");
 
 const templates = [
   { id: "modern", name: "Modern", component: resolveComponent("Modern") },
+  { id: "classic", name: "Classic", component: resolveComponent("Classic") },
 ] as const;
 
 type TemplateId = (typeof templates)[number]["id"];
