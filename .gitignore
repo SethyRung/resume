@@ -42,3 +42,4 @@ __screenshots__/
 auto-imports.d.ts
 components.d.ts
 .data/
+.vercel
