@@ -9,6 +9,7 @@
         "@comark/vue": "^0.5.1",
         "@nuxt/ui": "^4.10.0",
         "@tailwindcss/vite": "^4.3.3",
+        "tailwind-variants": "^3.3.0",
         "tailwindcss": "^4.3.3",
         "vue": "rc",
         "vue-to-print": "^1.5.1",
