@@ -123,7 +123,7 @@ const achievements = [
         </section>
       </DefineResumeSection>
 
-      <Page>
+      <Page class="p-0">
         <article
           class="grid grid-cols-[30fr_70fr] h-full text-[11px] leading-[1.45] text-default bg-default"
         >
@@ -132,7 +132,7 @@ const achievements = [
               <img
                 src="/profile.png"
                 alt=""
-                class="size-32 rounded-full object-cover border-4 border-white/15"
+                class="size-32 rounded-full object-cover border-4 border-accented"
               />
             </header>
 
@@ -169,10 +169,18 @@ const achievements = [
                   <UProgress :model-value="lang.proficiency" color="neutral" size="sm" />
                 </div>
               </ReuseResumeSection>
+
+              <ReuseResumeSection heading="Education">
+                <div v-for="e in education" :key="e.degree" class="mb-3 last:mb-0">
+                  <div class="font-semibold">{{ e.degree }}</div>
+                  <div class="text-muted">{{ e.school }} — {{ e.year }}</div>
+                  <div v-if="e.detail" class="text-muted text-[10px]">{{ e.detail }}</div>
+                </div>
+              </ReuseResumeSection>
             </div>
           </aside>
 
-          <section class="px-8 py-8 space-y-5">
+          <section class="px-8 py-6 space-y-5">
             <header>
               <h1 class="text-[44px] font-extrabold leading-none tracking-tight">SETHY RUNG</h1>
               <div class="flex items-center justify-between mt-3 gap-3 border-b-2 pb-3">
@@ -234,7 +242,7 @@ const achievements = [
         </article>
       </Page>
 
-      <Page>
+      <Page class="p-0">
         <article
           class="grid grid-cols-[30fr_70fr] h-full text-[11px] leading-[1.45] text-default bg-default"
         >
@@ -246,14 +254,6 @@ const achievements = [
                 </ul>
               </ReuseResumeSection>
 
-              <ReuseResumeSection heading="Education">
-                <div v-for="e in education" :key="e.degree" class="mb-3 last:mb-0">
-                  <div class="font-semibold">{{ e.degree }}</div>
-                  <div class="text-muted">{{ e.school }} — {{ e.year }}</div>
-                  <div v-if="e.detail" class="text-muted text-[10px]">{{ e.detail }}</div>
-                </div>
-              </ReuseResumeSection>
-
               <ReuseResumeSection heading="Focus Areas">
                 <ul class="list-disc pl-4 space-y-1 marker:text-default">
                   <li v-for="f in focusAreas" :key="f">{{ f }}</li>
@@ -262,19 +262,7 @@ const achievements = [
             </div>
           </aside>
 
-          <section class="px-8 py-8 space-y-5">
-            <header>
-              <h1 class="text-[44px] font-extrabold leading-none tracking-tight">SETHY RUNG</h1>
-              <div class="flex items-center justify-between mt-3 gap-3 border-b-2 pb-3">
-                <div class="text-base font-semibold">Full Stack Developer</div>
-                <div
-                  class="bg-primary-950 text-white px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide"
-                >
-                  {{ experienceYears }}
-                </div>
-              </div>
-            </header>
-
+          <section class="px-8 py-6 space-y-5">
             <ReuseResumeSection heading="Training & Workshops">
               <div class="grid grid-cols-2 gap-x-6 gap-y-3">
                 <div v-for="t in training" :key="t.name" class="flex gap-2">
