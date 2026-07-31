@@ -28,10 +28,9 @@ const educations: TimelineItem[] = [
 
 const skills = `
 - **Vue 3 / Nuxt** — primary frontend stack
-- **TypeScript** end-to-end, **Tailwind CSS v4**, @nuxt/ui
+- **TypeScript** end-to-end, Tailwind v4, @nuxt/ui
 - **Spring Boot** (Java), **FastAPI** (Python)
 - **PostgreSQL** + **Drizzle ORM**, **Zod** schemas
-- Pinia, GSAP, Better Auth, Bun, Docker
 `;
 
 const achievements = `
@@ -50,10 +49,10 @@ const work = [
     company: "Innoblock Technology",
     title: "Junior Frontend Developer",
     description: `
-- Ship features on the **TTGreen** sustainability & carbon management platform
-- Build reusable components, pages, layouts, and composables on **Nuxt** + **Vue 3**
-- Pair with design and backend teams for smooth end-to-end integration
-- Maintain a production Nuxt app on **Tailwind CSS v4** with \`@nuxt/ui\` primitives
+- Ship features on the **TTGreen** sustainability & carbon platform
+- Build reusable components and composables on **Nuxt** + **Vue 3**
+- Pair with design and backend for end-to-end delivery
+- Maintain production Nuxt app on **Tailwind CSS v4** with \`@nuxt/ui\`
 `,
   },
   {
@@ -64,7 +63,6 @@ const work = [
 - Contributed to PE Agent migration on **Nuxt** + **Spring Boot**
 - Built the Cross-Border Platform for Cambodia ↔ Korea credit reports
 - Worked on the **CBC Mini App** and the **AMK Mobile App**
-- Production exposure to **Vue 3**, **Nuxt**, **Spring Boot**, and **FastAPI** in a regulated-data team
 `,
   },
   {
@@ -72,9 +70,9 @@ const work = [
     company: "Personal Projects",
     title: "Full Stack Developer (self-employed)",
     description: `
-- Shipped 14+ projects across **Nuxt**, **Next.js**, **NestJS**, **Spring Boot**, and **Directus**
-- Highlights: Chongkran recipe app, The Angkor Times news site, Movies discovery
-- Use projects as the fastest way to learn a new stack or validate an idea
+- Shipped 14+ projects across Nuxt, Next.js, NestJS, Spring Boot, Directus
+- Highlights: Chongkran, The Angkor Times, Movies
+- Side projects to learn and validate new stacks
 `,
   },
 ];
@@ -102,104 +100,114 @@ const projects = [
 </script>
 
 <template>
+  <DefineResumeSection v-slot="{ heading, $slots }">
+    <section class="flex flex-col gap-2">
+      <h2 class="font-bold tracking-wide uppercase">{{ heading }}</h2>
+      <USeparator :ui="{ border: 'border-inverted' }" />
+      <component :is="$slots.default" />
+    </section>
+  </DefineResumeSection>
+
   <Suspense>
-    <article
-      class="grid grid-cols-[38fr_62fr] gap-x-6 px-8 py-10 print:py-0 text-sm text-default marker:text-default"
-    >
-      <DefineResumeSection v-slot="{ heading, $slots }">
-        <section class="flex flex-col gap-2">
-          <h2 class="font-bold tracking-wide uppercase">{{ heading }}</h2>
-          <USeparator :ui="{ border: 'border-inverted' }" />
-          <component :is="$slots.default" />
-        </section>
-      </DefineResumeSection>
+    <div>
+      <Page>
+        <article
+          class="grid grid-cols-[38fr_62fr] gap-x-6 h-full text-sm text-default marker:text-default"
+        >
+          <aside class="flex flex-col gap-5">
+            <img src="/profile.png" alt="" class="w-full aspect-4/5 object-cover bg-muted" />
 
-      <aside class="flex flex-col gap-5">
-        <img src="/profile.png" alt="" class="w-full aspect-4/5 object-cover bg-muted" />
+            <ul class="flex flex-col gap-1.5">
+              <li v-for="contact in contacts" :key="contact.url" class="flex items-center gap-2">
+                <UIcon :name="contact.icon" />
+                <span>{{ contact.url }}</span>
+              </li>
+            </ul>
 
-        <ul class="flex flex-col gap-1.5">
-          <li v-for="contact in contacts" :key="contact.url" class="flex items-center gap-2">
-            <UIcon :name="contact.icon" />
-            <span>{{ contact.url }}</span>
-          </li>
-        </ul>
+            <ReuseResumeSection heading="Education">
+              <UTimeline
+                :items="educations"
+                :default-value="3"
+                color="neutral"
+                size="xs"
+                :ui="{
+                  indicator: 'size-3 my-3',
+                  wrapper: 'pb-3',
+                }"
+              />
+            </ReuseResumeSection>
 
-        <ReuseResumeSection heading="Education">
-          <UTimeline
-            :items="educations"
-            :default-value="3"
-            color="neutral"
-            size="xs"
-            :ui="{
-              indicator: 'size-3 my-3',
-              wrapper: 'pb-3',
-            }"
-          />
-        </ReuseResumeSection>
+            <ReuseResumeSection heading="Core Skills">
+              <Comark
+                :markdown="skills"
+                class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0 marker:text-default"
+              />
+            </ReuseResumeSection>
+          </aside>
 
-        <ReuseResumeSection heading="Core Skills">
-          <Comark
-            :markdown="skills"
-            class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0 marker:text-default"
-          />
-        </ReuseResumeSection>
+          <section class="flex flex-col gap-5 pl-2">
+            <header class="flex flex-col gap-2">
+              <h1 class="text-[44px] font-extrabold leading-none tracking-tight">SETHY RUNG</h1>
+              <div class="text-lg">Full Stack Developer</div>
+            </header>
 
-        <ReuseResumeSection heading="Achievements">
-          <Comark :markdown="achievements" class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0" />
-        </ReuseResumeSection>
-      </aside>
+            <ReuseResumeSection heading="Professional Summary">
+              <Comark :markdown="summary" class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0" />
+            </ReuseResumeSection>
 
-      <section class="flex flex-col gap-5 pl-2">
-        <header class="flex flex-col gap-2">
-          <h1 class="text-[44px] font-extrabold leading-none tracking-tight">SETHY RUNG</h1>
-          <div class="text-lg">Full Stack Developer</div>
-        </header>
+            <ReuseResumeSection heading="Work Experience">
+              <div v-for="w in work" :key="w.company" class="space-y-1">
+                <div class="flex items-baseline gap-2">
+                  <span>{{ w.period }}</span>
+                  <span>|</span>
+                  <span>{{ w.company }}</span>
+                </div>
 
-        <ReuseResumeSection heading="Professional Summary">
-          <Comark :markdown="summary" class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0" />
-        </ReuseResumeSection>
+                <div class="font-semibold">{{ w.title }}</div>
 
-        <ReuseResumeSection heading="Work Experience">
-          <div v-for="w in work" :key="w.company" class="space-y-1">
-            <div class="flex items-baseline gap-2">
-              <span>{{ w.period }}</span>
-              <span>|</span>
-              <span>{{ w.company }}</span>
-            </div>
+                <Comark
+                  :markdown="w.description"
+                  class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
+                />
+              </div>
+            </ReuseResumeSection>
+          </section>
+        </article>
+      </Page>
 
-            <div class="font-semibold">{{ w.title }}</div>
+      <Page>
+        <article
+          class="grid grid-cols-[38fr_62fr] gap-x-6 h-full text-sm text-default marker:text-default"
+        >
+          <aside class="flex flex-col gap-5">
+            <ReuseResumeSection heading="Achievements">
+              <Comark
+                :markdown="achievements"
+                class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
+              />
+            </ReuseResumeSection>
+          </aside>
 
-            <Comark
-              :markdown="w.description"
-              class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
-            />
-          </div>
-        </ReuseResumeSection>
+          <section class="flex flex-col gap-5 pl-2">
+            <ReuseResumeSection heading="Projects">
+              <div v-for="p in projects" :key="p.title" class="space-y-1">
+                <div class="flex items-baseline gap-2 text-muted">
+                  <span>{{ p.period }}</span>
+                  <span>|</span>
+                  <span>{{ p.company }}</span>
+                </div>
 
-        <ReuseResumeSection heading="Projects">
-          <div v-for="p in projects" :key="p.title" class="space-y-1">
-            <div class="flex items-baseline gap-2 text-muted">
-              <span>{{ p.period }}</span>
-              <span>|</span>
-              <span>{{ p.company }}</span>
-            </div>
+                <div class="font-semibold">{{ p.title }}</div>
 
-            <div class="font-semibold">{{ p.title }}</div>
-
-            <Comark
-              :markdown="p.description"
-              class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
-            />
-          </div>
-        </ReuseResumeSection>
-      </section>
-    </article>
+                <Comark
+                  :markdown="p.description"
+                  class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
+                />
+              </div>
+            </ReuseResumeSection>
+          </section>
+        </article>
+      </Page>
+    </div>
   </Suspense>
 </template>
-
-<style>
-@page {
-  size: A4;
-  margin: 12mm 0;
-}
-</style>

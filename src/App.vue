@@ -34,11 +34,7 @@ const { handlePrint } = useVueToPrint({
       </div>
 
       <div ref="sheet" class="print-area">
-        <article
-          class="w-[210mm] min-h-[297mm] mx-auto bg-default text-default shadow-sm print:shadow-none"
-        >
-          <component :is="activeTemplate.component" />
-        </article>
+        <component :is="activeTemplate.component" />
       </div>
     </div>
   </UApp>
