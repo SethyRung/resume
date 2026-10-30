@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Comark } from "@comark/vue";
+import { Markdown } from "@comark/vue";
 import { createReusableTemplate } from "@vueuse/core";
 import type { TimelineItem } from "@nuxt/ui";
 
@@ -194,7 +194,7 @@ const achievements = [
             </header>
 
             <ReuseResumeSection heading="Profile">
-              <Comark :markdown="summary" class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0" />
+              <Markdown :value="summary" class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0" />
             </ReuseResumeSection>
 
             <ReuseResumeSection heading="Work Experience">
@@ -220,8 +220,8 @@ const achievements = [
                   <div class="text-default font-medium mb-2">
                     {{ item.company }} · {{ item.location }}
                   </div>
-                  <Comark
-                    :markdown="item.description"
+                  <Markdown
+                    :value="item.description"
                     class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
                   />
                   <div class="flex flex-wrap gap-1 mt-2">

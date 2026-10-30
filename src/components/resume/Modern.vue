@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Comark } from "@comark/vue";
+import { Markdown } from "@comark/vue";
 import type { TimelineItem } from "@nuxt/ui";
 
 const [DefineResumeSection, ReuseResumeSection] = createReusableTemplate<{ heading: string }>();
@@ -138,8 +138,8 @@ const projects = [
             </ReuseResumeSection>
 
             <ReuseResumeSection heading="Core Skills">
-              <Comark
-                :markdown="skills"
+              <Markdown
+                :value="skills"
                 class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0 marker:text-default"
               />
             </ReuseResumeSection>
@@ -152,7 +152,7 @@ const projects = [
             </header>
 
             <ReuseResumeSection heading="Professional Summary">
-              <Comark :markdown="summary" class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0" />
+              <Markdown :value="summary" class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0" />
             </ReuseResumeSection>
 
             <ReuseResumeSection heading="Work Experience">
@@ -165,8 +165,8 @@ const projects = [
 
                 <div class="font-semibold">{{ w.title }}</div>
 
-                <Comark
-                  :markdown="w.description"
+                <Markdown
+                  :value="w.description"
                   class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
                 />
               </div>
@@ -181,8 +181,8 @@ const projects = [
         >
           <aside class="flex flex-col gap-5">
             <ReuseResumeSection heading="Achievements">
-              <Comark
-                :markdown="achievements"
+              <Markdown
+                :value="achievements"
                 class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
               />
             </ReuseResumeSection>
@@ -199,8 +199,8 @@ const projects = [
 
                 <div class="font-semibold">{{ p.title }}</div>
 
-                <Comark
-                  :markdown="p.description"
+                <Markdown
+                  :value="p.description"
                   class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
                 />
               </div>
