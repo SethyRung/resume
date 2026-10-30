@@ -1,17 +1,19 @@
 {
   "version": 1,
   "skills": {
-    "agent-browser": {
-      "source": "vercel-labs/agent-browser",
-      "sourceType": "github",
-      "skillPath": "skills/agent-browser/SKILL.md",
-      "computedHash": "a674b7d81066e3cc471a7512ddb4ae724418cbfefa75cbb050b0dc430e4d57a0"
+    "comark": {
+      "source": "comark.dev",
+      "sourceUrl": "https://comark.dev",
+      "sourceType": "well-known",
+      "computedHash": "2a95a8efa065ece63c71f10ab6b4d029bb2b23c1321f29d98cfaaeb61f02779e",
+      "wellKnownDigest": "sha256:4fad2abf6016aed43428e6d91a1da85cbfb1e7e37f0ed2c6c2cdf8fcfb6bcf1e"
     },
-    "nuxt-ui": {
-      "source": "nuxt/ui",
-      "sourceType": "github",
-      "skillPath": "skills/nuxt-ui/SKILL.md",
-      "computedHash": "ef3a731fdfa8439d3c7f0c6d497a67073216b8cb7d7fa6a3c605a6fda4ede19a"
+    "migrate-mdc-to-comark": {
+      "source": "comark.dev",
+      "sourceUrl": "https://comark.dev",
+      "sourceType": "well-known",
+      "computedHash": "bb12957e65ed494b8af23e773d3d92560da7be3291eff53dab65a886c91cc174",
+      "wellKnownDigest": "sha256:4b7c4dfaa23b3ca54bc92a4709df2b0202edf83d326a0ab3a55878b6c3293983"
     },
     "pdf": {
       "source": "anthropics/skills",
