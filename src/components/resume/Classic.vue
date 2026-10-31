@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { Markdown } from "@comark/vue";
-import { createReusableTemplate } from "@vueuse/core";
-import type { TimelineItem } from "@nuxt/ui";
-
 const [DefineResumeSection, ReuseResumeSection] = createReusableTemplate<{ heading: string }>();
 
 const role = "FULL STACK DEVELOPER";
@@ -51,7 +47,7 @@ const summary = `
 Software developer based in Phnom Penh, building across web, mobile, and desktop. Currently shipping **Vue 3** + **Nuxt** frontends at Innoblock Technology on the **TTGreen** sustainability platform. Comfortable across the full vertical — Vue 3, Nuxt, Tailwind, and TypeScript on the frontend; Spring Boot (Java) and FastAPI (Python) on the backend; PostgreSQL for data. Prefers type-safe APIs, semantic UI primitives, and platform defaults.
 `;
 
-const work: TimelineItem[] = [
+const work = [
   {
     date: "03.2025 – Present",
     title: "Junior Frontend Developer",
@@ -110,193 +106,132 @@ const achievements = [
 </script>
 
 <template>
+  <DefineResumeSection v-slot="{ heading, $slots }">
+    <section class="flex break-inside-avoid flex-col gap-2">
+      <h2 class="font-editorial text-[13pt] font-bold tracking-[-0.2px]">{{ heading }}</h2>
+      <USeparator class="-mt-1 mb-0.5" :ui="{ border: 'border-inverted' }" />
+      <component :is="$slots.default" />
+    </section>
+  </DefineResumeSection>
+
   <Suspense>
-    <div>
-      <DefineResumeSection v-slot="{ heading, $slots }">
-        <section class="flex flex-col print:break-inside-avoid">
-          <h2
-            class="text-xs font-bold tracking-[0.15em] uppercase border-b border-zinc-900 pb-1.5 mb-3"
-          >
-            {{ heading }}
-          </h2>
-          <component :is="$slots.default" />
-        </section>
-      </DefineResumeSection>
-
-      <Page class="p-0">
-        <article
-          class="grid grid-cols-[30fr_70fr] h-full text-[11px] leading-[1.45] text-default bg-default"
+    <div class="text-[10pt] leading-[1.45]">
+      <Page>
+        <header class="flex items-center justify-between gap-6">
+          <div>
+            <p class="font-mono text-[8pt] leading-normal tracking-[1.1px] text-muted">
+              {{ role }} <span class="text-primary">/</span> {{ experienceYears }}
+            </p>
+            <h1 class="mt-1.75 font-editorial text-[36pt] leading-[1.2] tracking-[-1.5px]">
+              Sethy Rung
+            </h1>
+          </div>
+          <img
+            src="/profile.png"
+            alt="Illustrated portrait of Sethy Rung"
+            class="h-21 w-18 object-cover"
+          />
+        </header>
+        <ul
+          class="mt-5 mb-6 grid grid-cols-2 gap-x-6 gap-y-2 border-y border-t-2 border-default border-t-primary py-3.75 text-[9pt]"
         >
-          <aside class="flex flex-col">
-            <header class="bg-primary-950 text-white pt-8 pb-6 flex flex-col items-center">
-              <img
-                src="/profile.png"
-                alt=""
-                class="size-32 rounded-full object-cover border-4 border-accented"
-              />
-            </header>
-
-            <div class="bg-[#eef2f7] px-5 py-6 space-y-6 flex-1">
-              <ReuseResumeSection heading="Contact">
-                <ul class="space-y-2">
-                  <li v-for="c in contact" :key="c.icon" class="flex items-center gap-3">
-                    <div
-                      class="size-7 bg-primary-950 text-white flex items-center justify-center rounded shrink-0"
-                    >
-                      <UIcon :name="c.icon" class="size-3.5" />
-                    </div>
-                    <span>{{ c.value }}</span>
-                  </li>
-                </ul>
-              </ReuseResumeSection>
-
-              <ReuseResumeSection heading="Technical Skills">
-                <div class="space-y-3">
-                  <div v-for="(items, category) in skills" :key="category">
-                    <div class="font-semibold mb-1">{{ category }}</div>
-                    <div class="text-muted leading-snug">{{ items.join(", ") }}</div>
-                  </div>
-                </div>
-              </ReuseResumeSection>
-
-              <ReuseResumeSection heading="Languages">
-                <div v-for="lang in languages" :key="lang.name" class="mb-3 last:mb-0">
-                  <div class="flex items-baseline justify-between">
-                    <span class="font-semibold">{{ lang.name }}</span>
-                    <span class="text-muted text-[10px]">{{ lang.level }}</span>
-                  </div>
-
-                  <UProgress :model-value="lang.proficiency" color="neutral" size="sm" />
-                </div>
-              </ReuseResumeSection>
-
-              <ReuseResumeSection heading="Education">
-                <div v-for="e in education" :key="e.degree" class="mb-3 last:mb-0">
-                  <div class="font-semibold">{{ e.degree }}</div>
-                  <div class="text-muted">{{ e.school }} — {{ e.year }}</div>
-                  <div v-if="e.detail" class="text-muted text-[10px]">{{ e.detail }}</div>
-                </div>
-              </ReuseResumeSection>
-            </div>
-          </aside>
-
-          <section class="px-8 py-6 space-y-5">
-            <header>
-              <h1 class="text-[44px] font-extrabold leading-none tracking-tight">SETHY RUNG</h1>
-              <div class="flex items-center justify-between mt-3 gap-3 border-b-2 pb-3">
-                <div class="text-base font-semibold">Full Stack Developer</div>
-                <div
-                  class="bg-primary-950 text-white px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide"
-                >
-                  {{ experienceYears }}
-                </div>
-              </div>
-            </header>
-
-            <ReuseResumeSection heading="Profile">
-              <Markdown :value="summary" class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0" />
-            </ReuseResumeSection>
-
+          <li v-for="item in contact" :key="item.value" class="flex min-w-0 items-center gap-2">
+            <UIcon
+              class="size-3.5 shrink-0 text-muted"
+              :name="item.icon === 'i-simple-icons:github' ? 'i-lucide-github' : item.icon"
+            />
+            <span v-if="item.icon === 'i-lucide:map-pin'">{{ item.value }}</span>
+            <a
+              class="wrap-anywhere hover:text-primary hover:underline"
+              v-else
+              :href="item.value.includes('@') ? `mailto:${item.value}` : `https://${item.value}`"
+            >
+              {{ item.value }}
+            </a>
+          </li>
+        </ul>
+        <ReuseResumeSection heading="Profile">
+          <ResumeMarkdown :value="summary" />
+        </ReuseResumeSection>
+        <div class="mt-6 grid grid-cols-[65fr_35fr] gap-7">
+          <section class="flex min-w-0 flex-col gap-6">
             <ReuseResumeSection heading="Work Experience">
-              <UTimeline
-                :items="work"
-                :default-value="3"
-                color="neutral"
-                size="xs"
-                :ui="{
-                  indicator: 'size-3 my-3',
-                  wrapper: 'pb-3',
-                }"
-              >
-                <template #wrapper="{ item }">
-                  <div class="flex items-baseline justify-between gap-4 mb-1">
-                    <h3 class="font-bold text-sm text-default">{{ item.title }}</h3>
-                    <span
-                      class="bg-muted px-3 py-0.5 rounded-full text-[10px] text-muted whitespace-nowrap"
-                    >
-                      {{ item.date }}
-                    </span>
-                  </div>
-                  <div class="text-default font-medium mb-2">
-                    {{ item.company }} · {{ item.location }}
-                  </div>
-                  <Markdown
-                    :value="item.description"
-                    class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
-                  />
-                  <div class="flex flex-wrap gap-1 mt-2">
-                    <UBadge
-                      v-for="t in item.tags as string[]"
-                      :key="t"
-                      color="neutral"
-                      variant="subtle"
-                      size="sm"
-                    >
-                      {{ t }}
-                    </UBadge>
-                  </div>
-                </template>
-              </UTimeline>
+              <div v-for="entry in work" :key="entry.company" class="[&+div]:mt-2">
+                <p class="mb-0.75 font-mono text-[8pt] leading-[1.6] text-muted">
+                  {{ entry.date }}
+                </p>
+                <h3 class="text-[10.5pt] leading-[1.4] font-bold">{{ entry.title }}</h3>
+                <p class="mt-0.75 mb-2 text-[10pt] text-muted">
+                  {{ entry.company }} · {{ entry.location }}
+                </p>
+                <ResumeMarkdown :value="entry.description" />
+                <p class="mt-2 text-[8pt] leading-normal text-muted">{{ entry.tags.join(" · ") }}</p>
+              </div>
             </ReuseResumeSection>
           </section>
-        </article>
-      </Page>
-
-      <Page class="p-0">
-        <article
-          class="grid grid-cols-[30fr_70fr] h-full text-[11px] leading-[1.45] text-default bg-default"
-        >
-          <aside class="flex flex-col">
-            <div class="bg-[#eef2f7] px-5 py-6 space-y-6 flex-1">
-              <ReuseResumeSection heading="Core Strengths">
-                <ul class="list-disc pl-4 space-y-1 marker:text-default">
-                  <li v-for="s in strengths" :key="s">{{ s }}</li>
-                </ul>
-              </ReuseResumeSection>
-
-              <ReuseResumeSection heading="Focus Areas">
-                <ul class="list-disc pl-4 space-y-1 marker:text-default">
-                  <li v-for="f in focusAreas" :key="f">{{ f }}</li>
-                </ul>
-              </ReuseResumeSection>
-            </div>
+          <aside class="flex min-w-0 flex-col gap-6 border-l border-default pl-5.5">
+            <ReuseResumeSection heading="Technical Skills">
+              <div v-for="(items, category) in skills" :key="category">
+                <h3 class="mb-0.75 text-[10.5pt] leading-[1.4] font-bold">{{ category }}</h3>
+                <p class="text-muted">{{ items.join(", ") }}</p>
+              </div>
+            </ReuseResumeSection>
+            <ReuseResumeSection heading="Education">
+              <div v-for="item in education" :key="item.degree" class="[&_p]:mt-0.75 [&+div]:mt-2">
+                <p class="mb-0.75 font-mono text-[8pt] leading-[1.6] text-muted">
+                  {{ item.year }}
+                </p>
+                <h3 class="text-[10.5pt] leading-[1.4] font-bold">{{ item.degree }}</h3>
+                <p class="text-muted">{{ item.school }}</p>
+                <p v-if="item.detail" class="text-muted">{{ item.detail }}</p>
+              </div>
+            </ReuseResumeSection>
           </aside>
-
-          <section class="px-8 py-6 space-y-5">
+        </div>
+      </Page>
+      <Page>
+        <header
+          class="mb-8 flex items-baseline justify-between border-b-2 border-primary pb-5 [&>span:first-child]:text-[18pt] [&>span:first-child]:tracking-[-0.8px] [&>span:last-child]:text-[10pt] [&>span:last-child]:text-muted"
+        >
+          <span class="font-editorial">Sethy Rung</span>
+          <span>Full Stack Developer</span>
+        </header>
+        <div class="mt-6 grid grid-cols-[65fr_35fr] gap-7">
+          <section class="flex min-w-0 flex-col gap-6">
             <ReuseResumeSection heading="Training & Workshops">
-              <div class="grid grid-cols-2 gap-x-6 gap-y-3">
-                <div v-for="t in training" :key="t.name" class="flex gap-2">
-                  <div>
-                    <div class="font-semibold">{{ t.name }}</div>
-                    <div class="text-muted text-[10px]">{{ t.org }} — {{ t.date }}</div>
-                  </div>
-                </div>
+              <div v-for="item in training" :key="item.name" class="[&+div]:mt-2">
+                <p class="mb-0.75 font-mono text-[8pt] leading-[1.6] text-muted">
+                  {{ item.date }}
+                </p>
+                <h3 class="text-[10.5pt] leading-[1.4] font-bold">{{ item.name }}</h3>
+                <p class="text-muted">{{ item.org }}</p>
               </div>
             </ReuseResumeSection>
-
             <ReuseResumeSection heading="Achievements">
-              <div class="flex flex-wrap gap-1.5">
-                <UBadge
-                  v-for="a in achievements"
-                  :key="a"
-                  color="neutral"
-                  variant="subtle"
-                  size="sm"
-                >
-                  {{ a }}
-                </UBadge>
-              </div>
+              <ul class="grid list-disc gap-2 pl-4">
+                <li v-for="achievement in achievements" :key="achievement">{{ achievement }}</li>
+              </ul>
             </ReuseResumeSection>
           </section>
-        </article>
+          <aside class="flex min-w-0 flex-col gap-6 border-l border-default pl-5.5">
+            <ReuseResumeSection heading="Core Strengths">
+              <ul class="grid list-disc gap-2 pl-4">
+                <li v-for="strength in strengths" :key="strength">{{ strength }}</li>
+              </ul>
+            </ReuseResumeSection>
+            <ReuseResumeSection heading="Focus Areas">
+              <ul class="grid list-disc gap-2 pl-4">
+                <li v-for="focus in focusAreas" :key="focus">{{ focus }}</li>
+              </ul>
+            </ReuseResumeSection>
+            <ReuseResumeSection heading="Languages">
+              <p v-for="language in languages" :key="language.name">
+                <strong>{{ language.name }}</strong> — {{ language.level }}
+              </p>
+            </ReuseResumeSection>
+          </aside>
+        </div>
       </Page>
     </div>
   </Suspense>
 </template>
-
-<style>
-@page {
-  size: A4;
-  margin: 0;
-}
-</style>

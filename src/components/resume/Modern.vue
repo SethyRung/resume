@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { Markdown } from "@comark/vue";
-import type { TimelineItem } from "@nuxt/ui";
-
 const [DefineResumeSection, ReuseResumeSection] = createReusableTemplate<{ heading: string }>();
 
 const contacts = [
@@ -10,7 +7,7 @@ const contacts = [
   { icon: "i-lucide:mail", url: "rungsethyhk@gmail.com" },
 ];
 
-const educations: TimelineItem[] = [
+const educations = [
   {
     date: "2019 - 2023",
     title: "Royal University of Phnom Penh",
@@ -101,108 +98,111 @@ const projects = [
 
 <template>
   <DefineResumeSection v-slot="{ heading, $slots }">
-    <section class="flex flex-col gap-2">
-      <h2 class="font-bold tracking-wide uppercase">{{ heading }}</h2>
-      <USeparator :ui="{ border: 'border-inverted' }" />
+    <section class="flex break-inside-avoid flex-col gap-2.5">
+      <h2 class="text-[10pt] font-[750] tracking-[1.4px] text-primary uppercase">{{ heading }}</h2>
+      <USeparator class="-mt-1 mb-0.5" :ui="{ border: 'border-inverted' }" />
       <component :is="$slots.default" />
     </section>
   </DefineResumeSection>
 
   <Suspense>
-    <div>
+    <div class="text-[10pt] leading-[1.45]">
       <Page>
-        <article
-          class="grid grid-cols-[38fr_62fr] gap-x-6 h-full text-sm text-default marker:text-default"
-        >
-          <aside class="flex flex-col gap-5">
-            <img src="/profile.png" alt="" class="w-full aspect-4/5 object-cover bg-muted" />
-
-            <ul class="flex flex-col gap-1.5">
-              <li v-for="contact in contacts" :key="contact.url" class="flex items-center gap-2">
-                <UIcon :name="contact.icon" />
-                <span>{{ contact.url }}</span>
+        <article class="grid grid-cols-[30fr_70fr] gap-7">
+          <aside class="flex min-w-0 flex-col gap-6 pt-0.75">
+            <img
+              src="/profile.png"
+              alt="Illustrated portrait of Sethy Rung"
+              class="h-38.5 w-32.5 bg-muted object-cover"
+            />
+            <ul class="flex flex-col gap-2.5 text-[9pt]">
+              <li
+                v-for="contact in contacts"
+                :key="contact.url"
+                class="flex min-w-0 items-center gap-2"
+              >
+                <UIcon
+                  class="size-3.5 shrink-0 text-muted"
+                  :name="
+                    contact.icon === 'i-simple-icons:github' ? 'i-lucide-github' : contact.icon
+                  "
+                />
+                <a
+                  class="wrap-anywhere hover:text-primary hover:underline"
+                  :href="
+                    contact.url.includes('@') ? `mailto:${contact.url}` : `https://${contact.url}`
+                  "
+                >
+                  {{ contact.url }}
+                </a>
               </li>
             </ul>
-
             <ReuseResumeSection heading="Education">
-              <UTimeline
-                :items="educations"
-                :default-value="3"
-                color="neutral"
-                size="xs"
-                :ui="{
-                  indicator: 'size-3 my-3',
-                  wrapper: 'pb-3',
-                }"
-              />
+              <div
+                v-for="education in educations"
+                :key="education.title"
+                class="[&_p]:mt-0.75 [&+div]:mt-2"
+              >
+                <p class="mb-0.75 font-mono text-[8pt] leading-[1.6] text-muted">
+                  {{ education.date }}
+                </p>
+                <h3 class="text-[10.5pt] leading-[1.4] font-bold">{{ education.title }}</h3>
+                <p v-if="education.description" class="text-muted">{{ education.description }}</p>
+              </div>
             </ReuseResumeSection>
-
             <ReuseResumeSection heading="Core Skills">
-              <Markdown
-                :value="skills"
-                class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0 marker:text-default"
-              />
+              <ResumeMarkdown :value="skills" />
             </ReuseResumeSection>
           </aside>
-
-          <section class="flex flex-col gap-5 pl-2">
-            <header class="flex flex-col gap-2">
-              <h1 class="text-[44px] font-extrabold leading-none tracking-tight">SETHY RUNG</h1>
-              <div class="text-lg">Full Stack Developer</div>
+          <section class="flex min-w-0 flex-col gap-6">
+            <header class="mb-1.5">
+              <p class="font-mono text-[8pt] leading-normal tracking-[1.1px] text-muted">
+                WEB · MOBILE · DESKTOP
+              </p>
+              <h1 class="mt-3 text-[36pt] leading-[0.98] font-extrabold tracking-[-2.5px]">
+                SETHY
+                <br />
+                RUNG
+              </h1>
+              <p class="mt-3.5 text-[14pt]">Full Stack Developer</p>
             </header>
-
             <ReuseResumeSection heading="Professional Summary">
-              <Markdown :value="summary" class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0" />
+              <ResumeMarkdown :value="summary" />
             </ReuseResumeSection>
-
             <ReuseResumeSection heading="Work Experience">
-              <div v-for="w in work" :key="w.company" class="space-y-1">
-                <div class="flex items-baseline gap-2">
-                  <span>{{ w.period }}</span>
-                  <span>|</span>
-                  <span>{{ w.company }}</span>
-                </div>
-
-                <div class="font-semibold">{{ w.title }}</div>
-
-                <Markdown
-                  :value="w.description"
-                  class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
-                />
+              <div v-for="entry in work" :key="entry.company" class="[&+div]:mt-2">
+                <p class="mb-0.75 font-mono text-[8pt] leading-[1.6] text-muted">
+                  {{ entry.period }}
+                </p>
+                <h3 class="text-[10.5pt] leading-[1.4] font-bold">{{ entry.title }}</h3>
+                <p class="mt-0.75 mb-2 text-[10pt] text-muted">{{ entry.company }}</p>
+                <ResumeMarkdown :value="entry.description" />
               </div>
             </ReuseResumeSection>
           </section>
         </article>
       </Page>
-
       <Page>
-        <article
-          class="grid grid-cols-[38fr_62fr] gap-x-6 h-full text-sm text-default marker:text-default"
+        <header
+          class="mb-8 flex items-baseline justify-between border-b-2 border-primary pb-5 [&>span:first-child]:text-[18pt] [&>span:first-child]:tracking-[-0.8px] [&>span:last-child]:text-[10pt] [&>span:last-child]:text-muted"
         >
-          <aside class="flex flex-col gap-5">
+          <span class="font-bold">SETHY RUNG</span>
+          <span>Full Stack Developer</span>
+        </header>
+        <article class="grid grid-cols-[30fr_70fr] gap-7">
+          <aside class="flex min-w-0 flex-col gap-6">
             <ReuseResumeSection heading="Achievements">
-              <Markdown
-                :value="achievements"
-                class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
-              />
+              <ResumeMarkdown :value="achievements" />
             </ReuseResumeSection>
           </aside>
-
-          <section class="flex flex-col gap-5 pl-2">
-            <ReuseResumeSection heading="Projects">
-              <div v-for="p in projects" :key="p.title" class="space-y-1">
-                <div class="flex items-baseline gap-2 text-muted">
-                  <span>{{ p.period }}</span>
-                  <span>|</span>
-                  <span>{{ p.company }}</span>
-                </div>
-
-                <div class="font-semibold">{{ p.title }}</div>
-
-                <Markdown
-                  :value="p.description"
-                  class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
-                />
+          <section class="flex min-w-0 flex-col gap-6">
+            <ReuseResumeSection heading="Selected Projects">
+              <div v-for="project in projects" :key="project.title" class="[&+div]:mt-2">
+                <p class="mb-0.75 font-mono text-[8pt] leading-[1.6] text-muted">
+                  {{ project.period }} / {{ project.company }}
+                </p>
+                <h3 class="text-[10.5pt] leading-[1.4] font-bold">{{ project.title }}</h3>
+                <ResumeMarkdown :value="project.description" />
               </div>
             </ReuseResumeSection>
           </section>
