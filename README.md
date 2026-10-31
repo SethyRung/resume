@@ -25,6 +25,38 @@ bun fmt             # format with oxfmt
 bun lint            # lint with oxlint
 ```
 
+## Cloudflare deployment
+
+Hosting uses Cloudflare Workers Static Assets. `cloudflare.config.ts` defines the
+`resume` Worker and SPA fallback. The Cloudflare Vite plugin writes the deployable
+site to `.cloudflare/output/v0/`; no server-side Worker code is needed.
+
+Use Bun for dependency installation and project scripts. The Cloudflare CLI runs
+on Node.js; use Node.js 24.22 or newer in the 24.x release line.
+
+```sh
+bun install --frozen-lockfile
+cf auth login
+bun run deploy:check # typecheck, build, and validate without uploading
+bun run deploy       # typecheck, build, and deploy
+```
+
+For automatic deployments, connect this repository in Cloudflare Workers Builds:
+
+- Production branch: `main`
+- Build command: `bun run build`
+- Deploy command: `bunx --no-install cf deploy --prebuilt`
+- Root directory: repository root
+- Build environment: Node.js `24.22.2`, Bun `1.4.4`
+
+Use the Cloudflare dashboard to authorize the GitHub repository and configure the
+build's deployment token. CLI deployment uses your `cf auth login` session, or
+`CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in unattended environments.
+
+Production URL: <https://resume.sethyrung.com/>. The custom domain is declared in
+`cloudflare.config.ts`, so deployments preserve its Cloudflare routing. The
+`workers.dev` URL remains available for verification.
+
 ## Project structure
 
 ```

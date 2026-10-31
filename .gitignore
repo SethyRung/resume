@@ -43,6 +43,7 @@ auto-imports.d.ts
 components.d.ts
 .data/
 .vercel
+.cloudflare/
 
 # Stitch capture/upload artifacts
 .stitch/

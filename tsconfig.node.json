@@ -2,6 +2,7 @@
 {
   "extends": "@tsconfig/node24/tsconfig.json",
   "include": [
+    "cloudflare.config.*",
     "vite.config.*",
     "vitest.config.*",
     "cypress.config.*",
