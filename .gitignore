@@ -43,3 +43,6 @@ auto-imports.d.ts
 components.d.ts
 .data/
 .vercel
+
+# Stitch capture/upload artifacts
+.stitch/

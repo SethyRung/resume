@@ -1,6 +1,18 @@
 {
   "version": 1,
   "skills": {
+    "cf-cli": {
+      "source": "cloudflare/skills",
+      "sourceType": "github",
+      "skillPath": "skills/cf-cli/SKILL.md",
+      "computedHash": "439ebbec66d43c5bf28dea7468625c118c136cb810e09a8ef8dcc33184a990b3"
+    },
+    "cloudflare": {
+      "source": "cloudflare/skills",
+      "sourceType": "github",
+      "skillPath": "skills/cloudflare/SKILL.md",
+      "computedHash": "e7c26bb690042060d60fcccf3e5807d000c9c064f732b6fcfccb8bbcdc5dc04a"
+    },
     "comark": {
       "source": "comark.dev",
       "sourceUrl": "https://comark.dev",
@@ -20,6 +32,18 @@
       "sourceType": "github",
       "skillPath": "skills/pdf/SKILL.md",
       "computedHash": "cfbc539377088ca7e44a813b30c306327385bbd973cd7a721e1743f60837dd62"
+    },
+    "workers-best-practices": {
+      "source": "cloudflare/skills",
+      "sourceType": "github",
+      "skillPath": "skills/workers-best-practices/SKILL.md",
+      "computedHash": "b6252e1aa7c41d1fbec7f064684deb9bd79866c2b6f3e18deee6d7a0c673f3f3"
+    },
+    "workers-profiling": {
+      "source": "cloudflare/skills",
+      "sourceType": "github",
+      "skillPath": "skills/workers-profiling/SKILL.md",
+      "computedHash": "1b92c018275aaa2404565b7ec3819b7ae3424949991980b5ed1e01551f7f6cd7"
     }
   }
 }
